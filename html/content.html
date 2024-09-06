@@ -1,77 +1,26 @@
-<!--
- * @Author: GianZhang-SXAU zhangjianan545@gmail.com
- * @Date: 2024-09-06 09:29:33
- * @LastEditors: GianZhang-SXAU zhangjianan545@gmail.com
- * @LastEditTime: 2024-09-06 10:47:03
- * @FilePath: \无人车零售\html\content.html
- * @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
--->
-<!DOCTYPE html>
-<html lang="en">
+<!-- 中间地图区域 全国销售点划分-->
+<div id="container" style="height: 100%;"></div>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script type="text/javascript">
-        window._AMapSecurityConfig = {
-            securityJsCode: "「你申请的安全密钥」",
-        };
-    </script>
-</head>
+<script>
+  var map = new BMapGL.Map("container");          // 创建地图实例 
+  var point = new BMapGL.Point(112.48699, 37.94036);  // 创建点坐标 
+  map.centerAndZoom(point, 8);
 
-<body>
-    <!-- 中间地图区域 全国销售点划分-->
-    <div id="container" style="height: 100%;"></div>
-    <script>
+  var marker = new BMapGL.Marker(point);        // 创建标注   
+  map.addOverlay(marker);                     // 将标注添加到地图中
+  marker.addEventListener("click", function () {
+    //点击标点的时候进行事件处理
+    console.log("点击了标点");
+  });
 
-        // AMapLoader.load({
-        //     key: "d15c49cf2c9ff74a0e517beb96ad8faa", //申请好的Web端开发者 Key，调用 load 时必填
-        //     version: "2.0", //指定要加载的 JS API 的版本，缺省时默认为 1.4.15
-        // })
-        //     .then((AMap) => {
-        //         const map = new AMap.Map("container");
-        //     })
-        //     .catch((e) => {
-        //         console.error(e); //加载错误提示
-        //     });
+  map.enableScrollWheelZoom(true);     //开启鼠标滚轮缩放
+  map.setHeading(64.5);   //设置地图旋转角度
+  map.setTilt(73);       //设置地图的倾斜角度
 
-        // const marker = new AMap.Marker({
-        //     position: [112.48699, 37.94036], //位置
-        //     icon: '//a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png',
-        //     offset: new AMap.Pixel(-13, -30)
-        // });
-        // map.add(marker); //添加到地图
+  // 禁止地图旋转和倾斜可以通过配置项进行设置
+  var map = new BMapGL.Map("allmap", {
+    enableRotate: false,
+    enableTilt: false
+  });
 
-        // marker.addEventListener("click", function () {
-        //     //点击标点的时候进行事件处理
-        //     console.log("点击了标点");
-        // });
-
-        // map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
-
-        var map = new BMapGL.Map("container"); // 创建地图实例
-        var point = new BMapGL.Point(112.48699, 37.94036); // 创建点坐标 （太原）
-        map.centerAndZoom(point, 8);
-        var marker = new BMapGL.Marker(point); // 创建标注
-        map.addOverlay(marker); // 将标注添加到地图中
-
-
-        marker.addEventListener("click", function () {
-            //点击标点的时候进行事件处理
-            console.log("点击了标点");
-        });
-
-
-        map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
-        map.setHeading(64.5); //设置地图旋转角度
-        map.setTilt(73); //设置地图的倾斜角度
-        // 禁止地图旋转和倾斜可以通过配置项进行设置
-        var map = new BMapGL.Map("allmap", {
-            enableRotate: false,
-            enableTilt: false
-        });
-    </script>
-</body>
-
-</html>
+</script>
